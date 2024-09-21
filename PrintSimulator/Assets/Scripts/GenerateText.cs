@@ -5,6 +5,7 @@ public class GenerateText : MonoBehaviour
 {
     public TMP_Text wordDisplay;
     public int currentCharIndex;
+    public GameObject textCollider;
 
     private string[] _words;
     private string currentWord;
@@ -58,7 +59,7 @@ public class GenerateText : MonoBehaviour
                             isSpace = true;
                         }
 
-                        
+                        textCollider.GetComponent<IncreaseCollider>().IncreaseColl(letterWidth);
                         Poiner.instance.ScalePointer(letterWidth);
                         UpdateWordDisplay();
 
