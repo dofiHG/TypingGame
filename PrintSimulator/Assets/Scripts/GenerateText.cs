@@ -10,6 +10,8 @@ public class GenerateText : MonoBehaviour
     private string[] _words;
     private string currentWord;
     private bool isSpace;
+    private float letterWidth;
+    private int greenWords;
 
     private void Start()
     {
@@ -17,9 +19,7 @@ public class GenerateText : MonoBehaviour
         TextAsset textAsset = Resources.Load<TextAsset>("Russian");
         if (textAsset != null)
             _words = textAsset.text.Split(new char[] { ' ', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-        ShowNextWord();
-        float letterWidth = Poiner.instance.GetLetterWidth(currentWord[0]);
-        Poiner.instance.ScalePointer(letterWidth);
+        for (int i = 0; i <= 5; i++) { ShowNextWord(); }
         isSpace = false;
     }
 
@@ -40,31 +40,33 @@ public class GenerateText : MonoBehaviour
 
                     if (inputChar == currentWord[currentCharIndex])
                     {
-                        int fixSpase = 0;
+                        float fixSpase = 0;
                         currentCharIndex++;
-                        float letterWidth;
+
                         char currentLetter = currentWord[currentCharIndex];
                         if (currentLetter != ' ')
                         {
-                            fixSpase = isSpace? 5 : 0;
+                            fixSpase = isSpace ? 6f : 0;
                             letterWidth = Poiner.instance.GetLetterWidth(currentWord[currentCharIndex]);
-                            Poiner.instance.MovePointer((Poiner.instance.GetLetterWidth(currentWord[currentCharIndex - 1]) / 2 + Poiner.instance.GetLetterWidth(currentWord[currentCharIndex]) / 2) + fixSpase);
                             isSpace = false;
                         }
 
                         else
                         {
                             letterWidth = 20;
-                            Poiner.instance.MovePointer(Poiner.instance.GetLetterWidth(currentWord[currentCharIndex - 1]) / 2 + 10);
+                            greenWords += 1;
                             isSpace = true;
                         }
+                        textCollider.GetComponent<IncreaseCollider>().IncreaseColl(letterWidth-fixSpase);
 
-                        textCollider.GetComponent<IncreaseCollider>().IncreaseColl(letterWidth);
-                        Poiner.instance.ScalePointer(letterWidth);
                         UpdateWordDisplay();
 
-                        if (currentCharIndex >= currentWord.Length-1)
+                        if (wordDisplay.text.Split().Length-greenWords <= 5)
+                        {
+                            wordDisplay.rectTransform.sizeDelta = new Vector2(wordDisplay.rectTransform.sizeDelta.x + 200, wordDisplay.rectTransform.sizeDelta.y);
                             ShowNextWord();
+                        }
+                            
                     }
                 }
             }
@@ -83,13 +85,13 @@ public class GenerateText : MonoBehaviour
         for (int i = 0; i < currentWord.Length; i++)
         {
             if (i < currentCharIndex)
-            {
                 displayedWord += "<color=#00FF00>" + currentWord[i] + "</color>";
-            }
+
+            else if(i == currentCharIndex)
+                displayedWord += "<u>" + currentWord[i] + "</u>";
+
             else
-            {
                 displayedWord += currentWord[i];
-            }
         }
 
         wordDisplay.text = displayedWord;
