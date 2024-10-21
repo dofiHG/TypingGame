@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GenerateText : MonoBehaviour
 {
+    public static GenerateText instance;
     public TMP_Text wordDisplay;
     public int currentCharIndex;
     public GameObject textCollider;
@@ -13,10 +14,16 @@ public class GenerateText : MonoBehaviour
     private float letterWidth;
     private int greenWords;
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     private void Start()
     {
         currentCharIndex = 0;
-        TextAsset textAsset = Resources.Load<TextAsset>("Russian");
+        TextAsset textAsset = StartGame.instance.language == 0? Resources.Load<TextAsset>("Russian"): Resources.Load<TextAsset>("English");
         if (textAsset != null)
             _words = textAsset.text.Split(new char[] { ' ', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i <= 5; i++) { ShowNextWord(); }
@@ -42,7 +49,6 @@ public class GenerateText : MonoBehaviour
                     {
                         float fixSpase = 0;
                         currentCharIndex++;
-
                         char currentLetter = currentWord[currentCharIndex];
                         if (currentLetter != ' ')
                         {

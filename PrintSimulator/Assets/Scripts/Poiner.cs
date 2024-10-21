@@ -15,7 +15,7 @@ public class Poiner : MonoBehaviour
 
     public float GetLetterWidth(char letter)
     {
-        TMP_Text tempSymbol = Instantiate(_tempText, GameObject.Find("Canvas").GetComponent<Transform>());
+        TMP_Text tempSymbol = Instantiate(_tempText, GameObject.Find("GameElements").GetComponent<Transform>());
         tempSymbol.text = letter.ToString();
 
         tempSymbol.GetComponent<RectTransform>().sizeDelta = new Vector2(tempSymbol.preferredWidth, tempSymbol.preferredHeight);
