@@ -22,3 +22,6 @@
 https://assetstore.unity.com/packages/2d/pixel-cars-178447  
 https://assetstore.unity.com/packages/2d/characters/dragon-warrior-free-93896  
 https://assetstore.unity.com/packages/2d/characters/sunny-land-103349  
+
+### Обратная связь
+По вопросам, предложениям, багам обращаться в тг: https://t.me/StaticVoidFunc
