@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,14 +10,22 @@ using YG;
 public class StartGame : MonoBehaviour
 {
     public static StartGame instance;
-    public int language = -1;
+    public int language;
+    public float speed;
 
-    private int characterInt = -1;
+    private int characterInt;
 
     private void Awake()
     {
         if(instance == null)
             instance = this;
+    }
+
+    private void Start()
+    {
+        language = -1;
+        characterInt = -1;
+        speed = -1;
     }
 
     public void ChooseCharacter()
@@ -42,8 +51,16 @@ public class StartGame : MonoBehaviour
 
     public void StartGames()
     {
-        YandexGame.savesData.character = characterInt;
-        SceneManager.LoadScene(1);
+        if (CheckValidChoise())
+        {
+            YandexGame.savesData.character = characterInt;
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text = "Закончи выбор!";
+            StartCoroutine(Delay());
+        }
     }
 
     public void ChooseLang()
@@ -53,15 +70,41 @@ public class StartGame : MonoBehaviour
 
         if (language == 0)
         {
-            GameObject.Find("Rus").GetComponent<Image>().color = Color.white;
-            GameObject.Find("Eng").GetComponent<Image>().color = new Color(190, 190, 190, 255);
-            Debug.Log(1);
+            GameObject.Find("Rus").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+            GameObject.Find("Eng").GetComponent<Image>().color = new Color32(190, 190, 190, 255);
         }
         else
         {
-            GameObject.Find("Rus").GetComponent<Image>().color = new Color(190, 190, 190, 255);
-            GameObject.Find("Eng").GetComponent<Image>().color = Color.white;
-            Debug.Log(2);
+            GameObject.Find("Rus").GetComponent<Image>().color = new Color32(190, 190, 190, 255);
+            GameObject.Find("Eng").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
+    }
+
+    public void ChooseSpeedLvL()
+    {
+        foreach (Transform child in GameObject.Find("SpeedPanel").transform)
+            child.GetComponent<Image>().color = new Color32(191, 191, 191, 255);
+        EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.white;
+
+        switch (EventSystem.current.currentSelectedGameObject.name)
+        {
+            case "LightSpeed": speed = 0.2f; break;
+            case "MediumSpeed": speed = 0.5f; break;
+            case "HardSpeed": speed = 0.9f; break;
+            case "VeryHardSpeed": speed = 1.4f; break;
+        }
+    }
+
+    private bool CheckValidChoise()
+    {
+        if (language != -1 && characterInt != -1 && speed != -1)
+            return true;
+        return false;
+    }
+
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(2);
+        gameObject.GetComponentInChildren<TMP_Text>().text = "Начать забег";
     }
 }

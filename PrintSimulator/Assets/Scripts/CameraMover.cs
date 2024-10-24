@@ -18,7 +18,7 @@ public class CameraMover : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        environmentSpeed = ChooseSpeed.instance.speed;
+        environmentSpeed = StartGame.instance.speed;
     }
 
     private void Start() => mat = GetComponent<Renderer>().material;

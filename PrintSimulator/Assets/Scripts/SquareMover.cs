@@ -9,7 +9,7 @@ public class SquareMover : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        speed = ChooseSpeed.instance.speed;
+        speed = StartGame.instance.speed;
     }
 
     private void FixedUpdate() => transform.Translate(Vector2.right * speed * Time.deltaTime);
