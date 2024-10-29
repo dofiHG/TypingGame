@@ -32,7 +32,8 @@ public class StartGame : MonoBehaviour
     {
         string characterName = EventSystem.current.currentSelectedGameObject.GetComponent<Button>().name;
         foreach (Transform child in GameObject.Find("Characters").transform)
-            child.gameObject.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
+            if (child.GetComponent<Button>() != null)
+                child.gameObject.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
 
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.white;
         
