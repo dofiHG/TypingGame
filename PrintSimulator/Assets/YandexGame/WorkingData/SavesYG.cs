@@ -11,5 +11,9 @@ namespace YG
         public bool promptDone;
 
         public int character = -1;
+        public int bestScoreSlow;
+        public int bestScoreMid;
+        public int bestScoreFast;
+        public int bestScoreVeryFast;
     }
 }

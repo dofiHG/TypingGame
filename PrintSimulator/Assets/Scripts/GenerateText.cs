@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class GenerateText : MonoBehaviour
 {
@@ -49,6 +50,13 @@ public class GenerateText : MonoBehaviour
                     {
                         float fixSpase = 0;
                         currentCharIndex++;
+                        GameScore.instance.currentScore.text = currentCharIndex.ToString();
+                        if (currentCharIndex > YandexGame.savesData.bestScoreFast)
+                        {
+                            YandexGame.savesData.bestScoreFast = currentCharIndex;
+                            GameScore.instance.bestScore.text = currentCharIndex.ToString();
+                        }
+                        
                         char currentLetter = currentWord[currentCharIndex];
                         if (currentLetter != ' ')
                         {
