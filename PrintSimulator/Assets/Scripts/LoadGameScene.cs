@@ -5,6 +5,6 @@ public class LoadGameScene : MonoBehaviour
 {
     private void Awake()
     {
-        GameObject.Find("Player").GetComponent<Animator>().SetInteger("Character", YandexGame.savesData.character);
+        GameObject.Find("Player").GetComponent<Animator>().SetInteger("Character", StartGame.instance.characterInt);
     }
 }

@@ -10,9 +10,8 @@ namespace YG
         public string language = "ru";
         public bool promptDone;
 
-        public int character = -1;
         public int bestScoreSlow;
-        public int bestScoreMid;
+        public int bestScoreMedium;
         public int bestScoreFast;
         public int bestScoreVeryFast;
     }

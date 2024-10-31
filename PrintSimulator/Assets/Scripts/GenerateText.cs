@@ -56,7 +56,7 @@ public class GenerateText : MonoBehaviour
                             YandexGame.savesData.bestScoreFast = currentCharIndex;
                             GameScore.instance.bestScore.text = currentCharIndex.ToString();
                         }
-                        
+
                         char currentLetter = currentWord[currentCharIndex];
                         if (currentLetter != ' ')
                         {

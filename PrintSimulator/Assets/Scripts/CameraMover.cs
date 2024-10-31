@@ -21,7 +21,7 @@ public class CameraMover : MonoBehaviour
         if (instance == null)
             instance = this;
         environmentSpeed = StartGame.instance.speed;
-        GetComponent<MeshRenderer>().material = backgrounds[YandexGame.savesData.character];
+        GetComponent<MeshRenderer>().material = backgrounds[StartGame.instance.characterInt];
     }
 
     private void Start() => mat = GetComponent<Renderer>().material;

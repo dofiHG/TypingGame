@@ -12,8 +12,7 @@ public class StartGame : MonoBehaviour
     public static StartGame instance;
     public int language;
     public float speed;
-
-    private int characterInt;
+    public int characterInt;
 
     private void Awake()
     {
@@ -54,7 +53,6 @@ public class StartGame : MonoBehaviour
     {
         if (CheckValidChoise())
         {
-            YandexGame.savesData.character = characterInt;
             SceneManager.LoadScene(1);
         }
         else

@@ -16,6 +16,12 @@ public class GameScore : MonoBehaviour
             instance = this;
 
         currentScore.text = "0";
-        bestScore.text = YandexGame.savesData.bestScoreFast.ToString();
+        switch (StartGame.instance.speed)
+        {
+            case 0.2f: bestScore.text = YandexGame.savesData.bestScoreSlow.ToString(); break;
+            case 0.5f: bestScore.text = YandexGame.savesData.bestScoreMedium.ToString(); break;
+            case 0.9f: bestScore.text = YandexGame.savesData.bestScoreFast.ToString(); break;
+            case 1.4f: bestScore.text = YandexGame.savesData.bestScoreVeryFast.ToString(); break;
+        }
     }
 }
