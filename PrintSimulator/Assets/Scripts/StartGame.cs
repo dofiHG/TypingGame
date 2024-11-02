@@ -25,6 +25,10 @@ public class StartGame : MonoBehaviour
         language = -1;
         characterInt = -1;
         speed = -1;
+        /*YandexGame.savesData.bestScoreSlow = 0;
+        YandexGame.savesData.bestScoreMedium = 0;
+        YandexGame.savesData.bestScoreFast = 0;
+        YandexGame.savesData.bestScoreVeryFast = 0;*/
     }
 
     public void ChooseCharacter()
@@ -70,11 +74,11 @@ public class StartGame : MonoBehaviour
         if (language == 0)
         {
             GameObject.Find("Rus").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
-            GameObject.Find("Eng").GetComponent<Image>().color = new Color32(190, 190, 190, 255);
+            GameObject.Find("Eng").GetComponent<Image>().color = new Color32(140, 140, 140, 255);
         }
         else
         {
-            GameObject.Find("Rus").GetComponent<Image>().color = new Color32(190, 190, 190, 255);
+            GameObject.Find("Rus").GetComponent<Image>().color = new Color32(140, 140, 140, 255);
             GameObject.Find("Eng").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
     }
@@ -82,7 +86,7 @@ public class StartGame : MonoBehaviour
     public void ChooseSpeedLvL()
     {
         foreach (Transform child in GameObject.Find("SpeedPanel").transform)
-            child.GetComponent<Image>().color = new Color32(191, 191, 191, 255);
+            child.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.white;
 
         switch (EventSystem.current.currentSelectedGameObject.name)

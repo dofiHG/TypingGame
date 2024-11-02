@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using YG;
 
 public class EndGame : MonoBehaviour
@@ -12,5 +13,7 @@ public class EndGame : MonoBehaviour
         GameObject.Find("Player").GetComponent<SquareMover>().enabled = false;
         YandexGame.SaveProgress();
         GameObject.Find("WordsGenerator").GetComponent<GenerateText>().enabled = false;
+        GameObject.Find("PauseBtn").GetComponent<Button>().enabled = false;
+        GameObject.Find("CalculateAverageSpeed").GetComponent<CalculateAverageSpeed>().enabled = false;
     }
 }
