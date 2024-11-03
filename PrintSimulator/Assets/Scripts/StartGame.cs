@@ -13,6 +13,9 @@ public class StartGame : MonoBehaviour
     public int language;
     public float speed;
     public int characterInt;
+    public GameObject speedPanel;
+    public GameObject languagePanel;
+    public Button startBtn;
 
     private void Awake()
     {
@@ -25,10 +28,6 @@ public class StartGame : MonoBehaviour
         language = -1;
         characterInt = -1;
         speed = -1;
-        /*YandexGame.savesData.bestScoreSlow = 0;
-        YandexGame.savesData.bestScoreMedium = 0;
-        YandexGame.savesData.bestScoreFast = 0;
-        YandexGame.savesData.bestScoreVeryFast = 0;*/
     }
 
     public void ChooseCharacter()
@@ -51,6 +50,10 @@ public class StartGame : MonoBehaviour
             case "Dragon":
                 characterInt = 3; break;
         }
+        speedPanel.SetActive(true);
+        
+        if (CheckValidChoise())
+            startBtn.GetComponent<Animator>().enabled = true;
     }
 
     public void StartGames()
@@ -81,6 +84,8 @@ public class StartGame : MonoBehaviour
             GameObject.Find("Rus").GetComponent<Image>().color = new Color32(140, 140, 140, 255);
             GameObject.Find("Eng").GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         }
+        if (CheckValidChoise())
+            startBtn.GetComponent<Animator>().enabled = true;
     }
 
     public void ChooseSpeedLvL()
@@ -96,6 +101,7 @@ public class StartGame : MonoBehaviour
             case "HardSpeed": speed = 0.9f; break;
             case "VeryHardSpeed": speed = 1.4f; break;
         }
+        languagePanel.SetActive(true);
     }
 
     private bool CheckValidChoise()
@@ -110,4 +116,6 @@ public class StartGame : MonoBehaviour
         yield return new WaitForSeconds(2);
         gameObject.GetComponentInChildren<TMP_Text>().text = "Начать забег";
     }
+
+    private bool IsAllChosen() => speedPanel.activeSelf && languagePanel.activeSelf? true: false;
 }
