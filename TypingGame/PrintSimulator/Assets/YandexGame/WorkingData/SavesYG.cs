@@ -14,5 +14,6 @@ namespace YG
         public int bestScoreMedium;
         public int bestScoreFast;
         public int bestScoreVeryFast;
+        public float currentSpeed;
     }
 }

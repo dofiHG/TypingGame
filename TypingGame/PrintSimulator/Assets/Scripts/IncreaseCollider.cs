@@ -9,6 +9,6 @@ public class IncreaseCollider : MonoBehaviour
 
     public void IncreaseColl(float width)
     {
-        transform.localScale = new Vector2(transform.localScale.x + width*2, 14.2f);
+        transform.localScale = new Vector2(transform.localScale.x + width*2f, 14.2f);
     }
 }

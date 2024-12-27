@@ -1,4 +1,5 @@
 using UnityEngine;
+using YG;
 
 public class SquareMover : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class SquareMover : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        speed = StartGame.instance.speed;
+        speed = YandexGame.savesData.currentSpeed;
     }
 
     private void FixedUpdate() => transform.Translate(Vector2.right * speed * Time.deltaTime);

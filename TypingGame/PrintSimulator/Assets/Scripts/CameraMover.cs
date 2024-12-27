@@ -20,7 +20,7 @@ public class CameraMover : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-        environmentSpeed = StartGame.instance.speed;
+        environmentSpeed = YandexGame.savesData.currentSpeed;
         GetComponent<MeshRenderer>().material = backgrounds[StartGame.instance.characterInt];
     }
 

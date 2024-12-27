@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -14,6 +15,7 @@ public class GenerateText : MonoBehaviour
     private bool isSpace;
     private float letterWidth;
     private int greenWords;
+    private float speedLvL;
 
     private void Awake()
     {
@@ -29,6 +31,8 @@ public class GenerateText : MonoBehaviour
             _words = textAsset.text.Split(new char[] { ' ', '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
         for (int i = 0; i <= 5; i++) { ShowNextWord(); }
         isSpace = false;
+
+        speedLvL = GameObject.Find("Plane").GetComponent<CameraMover>().environmentSpeed;
     }
 
     private void Update()
@@ -51,10 +55,19 @@ public class GenerateText : MonoBehaviour
                         float fixSpase = 0;
                         currentCharIndex++;
                         GameScore.instance.currentScore.text = currentCharIndex.ToString();
-                        if (currentCharIndex > YandexGame.savesData.bestScoreFast)
+                        if (PausePanelActiv.instance.flag)
                         {
-                            YandexGame.savesData.bestScoreFast = currentCharIndex;
-                            GameScore.instance.bestScore.text = currentCharIndex.ToString();
+                            if (currentCharIndex >= Convert.ToInt32(GameScore.instance.bestScore.text))
+                            {
+                                switch (speedLvL)
+                                {
+                                    case 0.2f: YandexGame.savesData.bestScoreSlow = currentCharIndex; break;
+                                    case 0.5f: YandexGame.savesData.bestScoreMedium = currentCharIndex; break;
+                                    case 0.9f: YandexGame.savesData.bestScoreFast = currentCharIndex; break;
+                                    case 1.4f: YandexGame.savesData.bestScoreVeryFast = currentCharIndex; break;
+                                }
+                                GameScore.instance.bestScore.text = currentCharIndex.ToString();
+                            }
                         }
 
                         char currentLetter = currentWord[currentCharIndex];
@@ -89,7 +102,7 @@ public class GenerateText : MonoBehaviour
 
     private void ShowNextWord()
     {
-        currentWord += _words[Random.Range(0, _words.Length)] + " ";
+        currentWord += _words[UnityEngine.Random.Range(0, _words.Length)] + " ";
         UpdateWordDisplay();
     }
 

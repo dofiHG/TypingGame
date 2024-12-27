@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -19,7 +18,7 @@ public class StartGame : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
     }
 
@@ -60,6 +59,8 @@ public class StartGame : MonoBehaviour
     {
         if (CheckValidChoise())
         {
+            YandexGame.savesData.currentSpeed = speed;
+            YandexGame.SaveProgress();
             SceneManager.LoadScene(1);
         }
         else

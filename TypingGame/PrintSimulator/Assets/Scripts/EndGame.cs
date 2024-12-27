@@ -15,5 +15,7 @@ public class EndGame : MonoBehaviour
         GameObject.Find("WordsGenerator").GetComponent<GenerateText>().enabled = false;
         GameObject.Find("PauseBtn").GetComponent<Button>().enabled = false;
         GameObject.Find("CalculateAverageSpeed").GetComponent<CalculateAverageSpeed>().enabled = false;
+        GameObject.Find("WordsGenerator").GetComponent<GenerateText>().enabled = false;
+        YandexGame.SaveProgress();
     }
 }
