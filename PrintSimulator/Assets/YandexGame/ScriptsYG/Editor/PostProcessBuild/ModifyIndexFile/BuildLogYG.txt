@@ -1,2 +1,0 @@
-Build path: C:/Users/safaf/Desktop/UnityProjects/123
-Build number: 6
