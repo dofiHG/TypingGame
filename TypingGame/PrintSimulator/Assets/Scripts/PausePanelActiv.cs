@@ -66,8 +66,8 @@ public class PausePanelActiv : MonoBehaviour
             flag = false;
 
             moverScript.environmentSpeed = tempSpeed;
-            if (player.GetComponent<SquareMover>().speed != 0)
-                player.GetComponent<SquareMover>().speed = tempSpeed;
+           /* if (player.GetComponent<SquareMover>().speed != 0)
+                player.GetComponent<SquareMover>().speed = tempSpeed;*/
         }
 
         pausePanel.SetActive(false);
@@ -89,7 +89,7 @@ public class PausePanelActiv : MonoBehaviour
         }
 
         moverScript.enabled = false;
-        player.GetComponent<SquareMover>().enabled = false;
+        //player.GetComponent<SquareMover>().enabled = false;
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GameObject.Find("CalculateAverageSpeed").GetComponent<CalculateAverageSpeed>().enabled = false;

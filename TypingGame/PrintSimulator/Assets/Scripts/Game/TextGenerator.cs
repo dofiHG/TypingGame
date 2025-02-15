@@ -19,9 +19,10 @@ public class TextGenerator : MonoBehaviour
 
     private void SetUp()
     {
-        TextAsset textAsset = Resources.Load<TextAsset>("English");
+        TextAsset textAsset = StartGame.instance.language == 1? Resources.Load<TextAsset>("English") : Resources.Load<TextAsset>("Russian");
         _textStrings = textAsset.text.Split("\n");
-        _currentText = _textStrings[0];
+        int rangomString = Random.Range(0, _textStrings.Length - 1);
+        _currentText = _textStrings[rangomString];
 
         _currentCharIndex = 0;
         _mainText.text = string.Empty;
@@ -55,7 +56,10 @@ public class TextGenerator : MonoBehaviour
                     {
                         _currentCharIndex++;
                         PaintCorrectChar();
-                        MoveMainText.instance.MoveScroller();
+                        if (_currentCharIndex > 15)
+                        {
+                            MoveMainText.instance.MoveScroller();
+                        }
                     }
                     else
                         PaintMistakeChar();

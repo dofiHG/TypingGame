@@ -5,16 +5,17 @@ using UnityEngine;
 
 public class AutoSizeContent : MonoBehaviour
 {
-    public TMP_Text textComponent;
+    private TMP_Text textComponent;
     public RectTransform contentRectTransform;
 
-    void Start()
+    void Update()
     {
         UpdateContentSize();
     }
 
-    void UpdateContentSize()
+    private void UpdateContentSize()
     {
+        textComponent = GameObject.Find("MainText").GetComponent<TMP_Text>();
         textComponent.ForceMeshUpdate();
         var textSize = textComponent.GetRenderedValues(true);
 

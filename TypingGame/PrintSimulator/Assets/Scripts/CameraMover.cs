@@ -30,7 +30,7 @@ public class CameraMover : MonoBehaviour
     {
         if (player.transform.position.x > 0)
         {
-            player.GetComponent<SquareMover>().speed = 0;
+            //player.GetComponent<SquareMover>().speed = 0;
             startSquare.transform.Translate(new Vector2(-environmentSpeed, 0) * Time.deltaTime);
             textCollider.transform.Translate(new Vector2(-environmentSpeed, 0) * Time.deltaTime);
             text.transform.Translate(new Vector2(-environmentSpeed, 0) * Time.deltaTime);

@@ -21,13 +21,17 @@ public class MoveMainText : MonoBehaviour
 
     private void Start()
     {
+        SetUp();
+    }
+
+   private void SetUp()
+    {
         _textScroller.value = 0;
         _textLength = _mainText.text.Length;
     }
 
     public void MoveScroller()
     {
-        Debug.Log(1);
-        _textScroller.value += 1 / _textLength;
+        _textScroller.value += (float)1 / _textLength;
     }
 }

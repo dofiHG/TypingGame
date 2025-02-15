@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour
     {
         endPanel.SetActive(true);    
         GameObject.Find("Plane").GetComponent<CameraMover>().enabled = false;
-        GameObject.Find("Player").GetComponent<SquareMover>().enabled = false;
+        //GameObject.Find("Player").GetComponent<SquareMover>().enabled = false;
         //YandexGame.SaveProgress();
         GameObject.Find("WordsGenerator").GetComponent<GenerateText>().enabled = false;
         GameObject.Find("PauseBtn").GetComponent<Button>().enabled = false;

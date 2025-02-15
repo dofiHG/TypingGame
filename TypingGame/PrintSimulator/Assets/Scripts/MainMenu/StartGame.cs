@@ -35,7 +35,7 @@ public class StartGame : MonoBehaviour
     private void StartGameplay()
     {
         language = _language.value;
-        speed = _speedLevel.value;
+        speed = _speedLevel.value + 1;
         penguinInt = GameObject.Find("PenguinChanger").GetComponent<ChangePenguin>().currentIndex;
 
         if (penguinInt != -1 && language != -1 && speed != -1)
