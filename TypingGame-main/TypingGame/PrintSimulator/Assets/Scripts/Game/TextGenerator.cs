@@ -54,15 +54,19 @@ public class TextGenerator : MonoBehaviour
                 {
                     if (_currentText[_currentCharIndex] == inputChar)
                     {
+                        if (_currentText[_currentCharIndex] == ' ')
+                            CalculateStates.instance.wordsCount++;
+
                         _currentCharIndex++;
                         PaintCorrectChar();
                         if (_currentCharIndex > 15)
-                        {
                             MoveMainText.instance.MoveScroller();
-                        }
                     }
                     else
+                    {
                         PaintMistakeChar();
+                        CalculateStates.instance.mistakesCount++;
+                    }   
                 }
             }
         }

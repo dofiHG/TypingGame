@@ -24,14 +24,14 @@ public class MoveMainText : MonoBehaviour
         SetUp();
     }
 
-   private void SetUp()
+    private void SetUp()
     {
-        _textScroller.value = 0;
-        _textLength = _mainText.text.Length;
+         _textScroller.value = 0;
+         _textLength = _mainText.text.Length;
     }
 
     public void MoveScroller()
     {
-        _textScroller.value += (float)1 / _textLength;
+         _textScroller.value += (float)1 / _textLength;
     }
 }

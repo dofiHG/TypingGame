@@ -14,10 +14,5 @@ public class PenguinMover : MonoBehaviour
             instance = this;
     }
 
-    private void Update()
-    {
-        Debug.Log(speed);
-    }
-
     private void FixedUpdate() => transform.Translate(Vector2.right * speed * Time.deltaTime);
 }

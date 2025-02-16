@@ -19,7 +19,7 @@ public class SetupGame : MonoBehaviour
     private void LevelSetup()
     {
         _penguin.sprite = _penguins[StartGame.instance.penguinInt];
-        _speed = StartGame.instance.speed * 0.6f;
+        _speed = StartGame.instance.speed * 4f;
         PenguinMover.instance.speed = _speed;
     }
 }
