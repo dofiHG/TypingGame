@@ -1,16 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class TextGenerator : MonoBehaviour
 {
+    public static TextGenerator instance;
+    public int currentCharIndex;
+    public string currentPublicText;
+
     [SerializeField] private TMP_Text _mainText;
 
     private string _currentText;
     private string[] _textStrings;
-    private int _currentCharIndex;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     private void Start()
     {
@@ -23,8 +34,9 @@ public class TextGenerator : MonoBehaviour
         _textStrings = textAsset.text.Split("\n");
         int rangomString = Random.Range(0, _textStrings.Length - 1);
         _currentText = _textStrings[rangomString];
+        currentPublicText = _currentText;
 
-        _currentCharIndex = 0;
+        currentCharIndex = 0;
         _mainText.text = string.Empty;
 
         _mainText.text = _currentText;
@@ -50,17 +62,23 @@ public class TextGenerator : MonoBehaviour
                 else
                     inputChar = char.ToLower(inputChar);
                 
-                if (_currentCharIndex < _currentText.Length)
+                if (currentCharIndex < _currentText.Length)
                 {
-                    if (_currentText[_currentCharIndex] == inputChar)
+                    if (_currentText[currentCharIndex] == inputChar)
                     {
-                        if (_currentText[_currentCharIndex] == ' ')
+                        IceMover.instance.Move();
+                        if (currentCharIndex == _currentText.Length - 2)
+                            CalculateStates.instance.OnWin();
+
+                        if (_currentText[currentCharIndex] == ' ')
                             CalculateStates.instance.wordsCount++;
 
-                        _currentCharIndex++;
+                        currentCharIndex++;
+
                         PaintCorrectChar();
-                        if (_currentCharIndex > 15)
+                        if (currentCharIndex > 15)
                             MoveMainText.instance.MoveScroller();
+                        
                     }
                     else
                     {
@@ -76,14 +94,14 @@ public class TextGenerator : MonoBehaviour
     {
         string newText = "";
 
-        if (_currentCharIndex > 0)
-            newText += "<color=#BDBDBE>" + _currentText.Substring(0, _currentCharIndex) + "</color>";
+        if (currentCharIndex > 0)
+            newText += "<color=#BDBDBE>" + _currentText.Substring(0, currentCharIndex) + "</color>";
 
-        if (_currentCharIndex < _currentText.Length)
-            newText += "<color=#D91B1B>" + _currentText[_currentCharIndex] + "</color>";
+        if (currentCharIndex < _currentText.Length)
+            newText += "<color=#D91B1B>" + _currentText[currentCharIndex] + "</color>";
 
-        if (_currentCharIndex + 1 < _currentText.Length)
-            newText += _currentText.Substring(_currentCharIndex + 1);
+        if (currentCharIndex + 1 < _currentText.Length)
+            newText += _currentText.Substring(currentCharIndex + 1);
 
         _mainText.text = newText;
     }
@@ -92,14 +110,14 @@ public class TextGenerator : MonoBehaviour
     {
         string newText = "";
 
-        if (_currentCharIndex > 0)
-            newText += "<color=#BDBDBE>" + _currentText.Substring(0, _currentCharIndex) + "</color>";
+        if (currentCharIndex > 0)
+            newText += "<color=#BDBDBE>" + _currentText.Substring(0, currentCharIndex) + "</color>";
 
-        if (_currentCharIndex < _currentText.Length)
-            newText += "<color=#7397EF>" + _currentText[_currentCharIndex] + "</color>";
+        if (currentCharIndex < _currentText.Length)
+            newText += "<color=#7397EF>" + _currentText[currentCharIndex] + "</color>";
 
-        if (_currentCharIndex + 1 < _currentText.Length)
-            newText += _currentText.Substring(_currentCharIndex + 1);
+        if (currentCharIndex + 1 < _currentText.Length)
+            newText += _currentText.Substring(currentCharIndex + 1);
 
         _mainText.text = newText;
     }

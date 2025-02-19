@@ -20,6 +20,5 @@ public class SetupGame : MonoBehaviour
     {
         _penguin.sprite = _penguins[StartGame.instance.penguinInt];
         _speed = StartGame.instance.speed * 4f;
-        PenguinMover.instance.speed = _speed;
     }
 }
