@@ -10,7 +10,7 @@ public class ChangePenguin : MonoBehaviour
     [SerializeField] private Scrollbar _penguinsScroll;
     [SerializeField] private ScrollRect scrollRect;
 
-    private const float _penguinsCount = 4;
+    private const float _penguinsCount = 3;
 
     [HideInInspector] public int currentIndex = 0;
 

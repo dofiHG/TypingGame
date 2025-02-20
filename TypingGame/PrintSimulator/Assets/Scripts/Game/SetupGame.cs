@@ -19,6 +19,7 @@ public class SetupGame : MonoBehaviour
     private void LevelSetup()
     {
         _penguin.sprite = _penguins[StartGame.instance.penguinInt];
+        _penguin.gameObject.GetComponent<Animator>().SetInteger("Penguin", StartGame.instance.penguinInt);
         _speed = StartGame.instance.speed * 4f;
     }
 }

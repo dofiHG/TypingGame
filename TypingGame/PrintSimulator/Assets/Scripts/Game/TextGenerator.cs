@@ -66,7 +66,6 @@ public class TextGenerator : MonoBehaviour
                 {
                     if (_currentText[currentCharIndex] == inputChar)
                     {
-                        IceMover.instance.Move();
                         if (currentCharIndex == _currentText.Length - 2)
                             CalculateStates.instance.OnWin();
 
@@ -78,7 +77,12 @@ public class TextGenerator : MonoBehaviour
                         PaintCorrectChar();
                         if (currentCharIndex > 15)
                             MoveMainText.instance.MoveScroller();
-                        
+
+                        IceMoverUp currentIce = FindCurrentIce();
+                        if (currentIce != null)
+                        {
+                            currentIce.Move();
+                        }
                     }
                     else
                     {
@@ -120,5 +124,16 @@ public class TextGenerator : MonoBehaviour
             newText += _currentText.Substring(currentCharIndex + 1);
 
         _mainText.text = newText;
+    }
+
+    private IceMoverUp FindCurrentIce()
+    {
+        IceMoverUp[] iceMovers = FindObjectsOfType<IceMoverUp>();
+        foreach (IceMoverUp ice in iceMovers)
+        {
+            if (ice.enabled)
+                return ice;
+        }
+        return null;
     }
 }
