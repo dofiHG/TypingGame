@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceSpawner : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class IceSpawner : MonoBehaviour
                 newIce.transform.SetSiblingIndex(_player.transform.GetSiblingIndex() - 1);
                 newIce.AddComponent<IceMoverUp>();
                 newIce.transform.localPosition = new Vector2(_startIcePosition + 310 * _iceIndex, -400);
+                newIce.gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 128);
 
                 IceMoverUp newIceMover = newIce.GetComponent<IceMoverUp>();
                 if (newIceMover != null)

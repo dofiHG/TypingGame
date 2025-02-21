@@ -7,11 +7,11 @@ public class SetupGame : MonoBehaviour
 {
     [SerializeField] private Image _penguin;
     [SerializeField] private Sprite[] _penguins;
-
     private int _language;
-    private float _speed;
 
-    private void Start()
+    [HideInInspector] public float speed;
+
+    private void Awake()
     {
         LevelSetup();
     }
@@ -20,6 +20,6 @@ public class SetupGame : MonoBehaviour
     {
         _penguin.sprite = _penguins[StartGame.instance.penguinInt];
         _penguin.gameObject.GetComponent<Animator>().SetInteger("Penguin", StartGame.instance.penguinInt);
-        _speed = StartGame.instance.speed * 4f;
+        speed = StartGame.instance.speed * 2f;
     }
 }

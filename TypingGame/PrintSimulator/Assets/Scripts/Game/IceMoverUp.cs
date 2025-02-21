@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IceMoverUp : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class IceMoverUp : MonoBehaviour
             return;
         }
 
+        transform.localPosition = new Vector2(transform.localPosition.x, -110);
+        gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
         gameObject.GetComponent<BoxCollider2D>().enabled = true;
         enabled = false;
     }
