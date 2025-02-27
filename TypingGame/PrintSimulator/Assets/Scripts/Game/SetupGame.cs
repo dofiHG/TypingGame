@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,13 @@ public class SetupGame : MonoBehaviour
     {
         _penguin.sprite = _penguins[StartGame.instance.penguinInt];
         _penguin.gameObject.GetComponent<Animator>().SetInteger("Penguin", StartGame.instance.penguinInt);
-        speed = StartGame.instance.speed * 2f;
+        switch (StartGame.instance.speed)
+        {
+            case 0: speed = 1f; break;
+            case 1: speed = 3f; break;
+            case 2: speed = 8f; break;
+            case 3: speed = 14f; break;
+            case 4: speed = 25f; break;
+        }
     }
 }

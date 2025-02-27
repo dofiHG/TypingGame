@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class PenguinMover : MonoBehaviour
 {
-    private const float _startPosition = -650f;
+    public static PenguinMover instance;
 
-    private void Update()
+    private const float _startPosition = -650f;
+    private const float _distance = 1300f;
+
+    private void Awake()
     {
-        if (TextGenerator.instance.currentCharIndex != 0)
-        {
-            float currentIndex = TextGenerator.instance.currentCharIndex;
-            float textLength = TextGenerator.instance.currentPublicText.Length;
-            transform.localPosition = new Vector2(_startPosition + currentIndex / textLength * 1380, transform.localPosition.y);
-        }
+        if (instance == null)
+            instance = this;
+    }
+
+    public void MovePenguin(float textLength)
+    {
+        float step = _distance / textLength;
+
+        float newX = transform.localPosition.x + step;
+        transform.localPosition = new Vector2(newX, transform.localPosition.y);
     }
 }

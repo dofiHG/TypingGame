@@ -13,6 +13,7 @@ public class TextGenerator : MonoBehaviour
     public string currentPublicText;
 
     [SerializeField] private TMP_Text _mainText;
+    [SerializeField] private Slider _progressSlider;
 
     private string _currentText;
     private string[] _textStrings;
@@ -40,6 +41,8 @@ public class TextGenerator : MonoBehaviour
         _mainText.text = string.Empty;
 
         _mainText.text = _currentText;
+
+        _progressSlider.maxValue = _currentText.Length;
     }
 
     private void Update()
@@ -75,6 +78,8 @@ public class TextGenerator : MonoBehaviour
                         currentCharIndex++;
 
                         PaintCorrectChar();
+                        PenguinMover.instance.MovePenguin(currentPublicText.Length);
+
                         if (currentCharIndex > 15)
                             MoveMainText.instance.MoveScroller();
 
@@ -83,6 +88,8 @@ public class TextGenerator : MonoBehaviour
                         {
                             currentIce.Move();
                         }
+
+                        _progressSlider.value += 1;
                     }
                     else
                     {
