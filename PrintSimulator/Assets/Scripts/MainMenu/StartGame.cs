@@ -36,7 +36,7 @@ public class StartGame : MonoBehaviour
     {
         language = _language.value;
         speed = _speedLevel.value;
-        penguinInt = GameObject.Find("PenguinChanger").GetComponent<ChangePenguin>().currentIndex;
+        penguinInt = GameObject.Find("PenguinChanger").GetComponent<ChangePenguin>().GetCurrentRealIndex();
 
         if (penguinInt != -1 && language != -1 && speed != -1)
             SceneManager.LoadScene(1);
