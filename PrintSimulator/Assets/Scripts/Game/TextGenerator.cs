@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,11 @@ public class TextGenerator : MonoBehaviour
 
     [SerializeField] private TMP_Text _mainText;
     [SerializeField] private Slider _progressSlider;
+    [SerializeField] private GameObject _warningPanelManager;
 
     private string _currentText;
     private string[] _textStrings;
+    private int _language;
 
     private void Awake()
     {
@@ -25,9 +28,23 @@ public class TextGenerator : MonoBehaviour
         SetUp();
     }
 
-    private void SetUp()
+    public void SetUp()
     {
-        TextAsset textAsset = StartGame.instance.language == 1? Resources.Load<TextAsset>("English") : Resources.Load<TextAsset>("Russian");
+        _language = StartGame.instance.language;
+
+        TextAsset textAsset;
+        if (_language == 0)
+        {
+            textAsset = Resources.Load<TextAsset>("R" + StartGame.instance.speed);
+        }
+
+
+        else
+        {
+            textAsset = Resources.Load<TextAsset>("E" + StartGame.instance.speed);
+        }
+        //textAsset = _language == 1? Resources.Load<TextAsset>("English") : Resources.Load<TextAsset>("Russian");
+
         _textStrings = textAsset.text.Split("\n");
         int rangomString = Random.Range(0, _textStrings.Length - 1);
         _currentText = _textStrings[rangomString];
@@ -38,7 +55,7 @@ public class TextGenerator : MonoBehaviour
 
         _mainText.text = _currentText;
 
-        _progressSlider.maxValue = _currentText.Length;
+        _progressSlider.maxValue = _currentText.Length - 1;
     }
 
     private void Update()
@@ -63,10 +80,18 @@ public class TextGenerator : MonoBehaviour
                 
                 if (currentCharIndex < _currentText.Length)
                 {
+                    (bool isValid, int targetLanguage) = CheckLanguage.instance.CheckSymbol(inputChar, _language);
+                    if (!isValid)
+                    {
+                        _warningPanelManager.SetActive(true);
+                        OpenWarningScript.instance.OpenWarningPanel(targetLanguage);
+                        return;
+                    }
+
                     if (_currentText[currentCharIndex] == inputChar)
                     {
                         if (currentCharIndex == _currentText.Length - 2)
-                            CalculateStates.instance.OnWin();
+                            StartCoroutine(DelayBeforeWin());
 
                         if (_currentText[currentCharIndex] == ' ')
                             CalculateStates.instance.wordsCount++;
@@ -138,5 +163,11 @@ public class TextGenerator : MonoBehaviour
                 return ice;
         }
         return null;
+    }
+
+    private IEnumerator DelayBeforeWin()
+    {
+        yield return new WaitForSeconds(0.25f);
+        CalculateStates.instance.OnWin();
     }
 }

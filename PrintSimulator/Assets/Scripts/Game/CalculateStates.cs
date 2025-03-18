@@ -37,19 +37,19 @@ public class CalculateStates : MonoBehaviour
     private void CalculateAverageSpeed()
     {
         time += Time.deltaTime;
-        speed = Convert.ToInt32(TextGenerator.instance.currentCharIndex / time * 60);
+        if (time != 0)
+            speed = Convert.ToInt32(TextGenerator.instance.currentCharIndex / time * 60);
     }
 
     public void OnLoss()
     {
-        _captionText.text = "попробуй ещё!";
+        _captionText.text = "Попробуй ещё!";
         _mainImage.sprite = _panelPenguins[0];
         ShowStates();
     }
 
     public void OnWin()
     {
-
         _captionText.text = "Великолепно!";
         _mainImage.sprite = _panelPenguins[1];
         ShowStates();

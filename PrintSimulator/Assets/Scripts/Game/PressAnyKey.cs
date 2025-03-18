@@ -7,7 +7,10 @@ public class PressAnyKey : MonoBehaviour
     [SerializeField] private GameObject _textGenerator;
     [SerializeField] private GameObject _sliderFill;
 
-    private void Awake() => Time.timeScale = 0;
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
 
     private void Update()
     {
