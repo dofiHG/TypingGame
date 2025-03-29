@@ -4242,7 +4242,7 @@ MonoBehaviour:
   speed: 0
   penguinInt: 0
   _startBtn: {fileID: 1889901904}
-  _language: {fileID: 1041015370}
+  _languageDD: {fileID: 0}
   _speedLevel: {fileID: 653128658}
   _startGame: {fileID: 0}
   _gamePanel: {fileID: 0}
@@ -5710,7 +5710,7 @@ MonoBehaviour:
   speed: 0
   penguinInt: 0
   _startBtn: {fileID: 1889901904}
-  _language: {fileID: 1041015370}
+  _languageDD: {fileID: 1041015370}
   _speedLevel: {fileID: 653128658}
   _startGame: {fileID: 262504063}
   _gamePanel: {fileID: 1744778394}

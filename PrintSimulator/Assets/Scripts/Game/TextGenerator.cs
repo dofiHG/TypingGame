@@ -38,7 +38,6 @@ public class TextGenerator : MonoBehaviour
             textAsset = Resources.Load<TextAsset>("R" + StartGame.instance.speed);
         }
 
-
         else
         {
             textAsset = Resources.Load<TextAsset>("E" + StartGame.instance.speed);
@@ -88,12 +87,17 @@ public class TextGenerator : MonoBehaviour
                         return;
                     }
 
-                    if (_currentText[currentCharIndex] == inputChar)
+                    char currentChar = _currentText[currentCharIndex];
+
+                    if (currentChar == '«' || currentChar == '»')
+                        currentChar = '"';
+
+                    if (currentChar == inputChar)
                     {
                         if (currentCharIndex == _currentText.Length - 2)
                             StartCoroutine(DelayBeforeWin());
 
-                        if (_currentText[currentCharIndex] == ' ')
+                        if (currentChar == ' ')
                             CalculateStates.instance.wordsCount++;
 
                         currentCharIndex++;
@@ -130,7 +134,13 @@ public class TextGenerator : MonoBehaviour
             newText += "<color=#BDBDBE>" + _currentText.Substring(0, currentCharIndex) + "</color>";
 
         if (currentCharIndex < _currentText.Length)
-            newText += "<color=#D91B1B>" + _currentText[currentCharIndex] + "</color>";
+        {
+            char currentChar = _currentText[currentCharIndex];
+            if (currentChar == ' ')
+                newText += "<color=#D91B1B>_</color>";
+            else
+                newText += "<color=#D91B1B>" + currentChar + "</color>";
+        }
 
         if (currentCharIndex + 1 < _currentText.Length)
             newText += _currentText.Substring(currentCharIndex + 1);

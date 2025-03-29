@@ -9,8 +9,6 @@ public class SetupGame : MonoBehaviour
     [SerializeField] private Image _penguin;
     [SerializeField] private Sprite[] _penguins;
 
-    private int _language;
-
     [HideInInspector] public float speed;
 
     public void LevelSetup(int penguinInt, float speed)

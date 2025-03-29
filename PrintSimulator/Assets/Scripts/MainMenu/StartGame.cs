@@ -14,8 +14,11 @@ public class StartGame : MonoBehaviour
     [HideInInspector] public int speed;
     [HideInInspector] public int penguinInt;
 
+    private static int _language;
+    private static int _speed;
+
     [SerializeField] private Button _startBtn;
-    [SerializeField] private TMP_Dropdown _language;
+    [SerializeField] private TMP_Dropdown _languageDD;
     [SerializeField] private TMP_Dropdown _speedLevel;
     [SerializeField] private SetupGame _startGame;
     [SerializeField] private GameObject _gamePanel;
@@ -30,26 +33,21 @@ public class StartGame : MonoBehaviour
     {
         _startBtn.onClick.AddListener(StartGameplay);
 
-        penguinInt = -1;
-        language = PlayerPrefs.GetInt("Language", -1);
-        speed = PlayerPrefs.GetInt("Speed", -1);
-
-        if (language != -1 && speed != -1)
+        if (_language != -1 && _speed != -1)
         {
-            _language.value = language;
-            _speedLevel.value = speed;
+            _languageDD.value = _language;
+            _speedLevel.value = _speed;
         }
     }
 
     public void StartGameplay()
     {
-        language = _language.value;
-        speed = _speedLevel.value;
+        _language = _languageDD.value;
+        _speed = _speedLevel.value;
         penguinInt = GameObject.Find("PenguinChanger").GetComponent<ChangePenguin>().GetCurrentRealIndex();
 
-        PlayerPrefs.SetInt("Language", language);
-        PlayerPrefs.SetInt("Speed", speed);
-        PlayerPrefs.Save();
+        language = _language;
+        speed = _speed;
 
         if (penguinInt != -1 && language != -1 && speed != -1)
         {

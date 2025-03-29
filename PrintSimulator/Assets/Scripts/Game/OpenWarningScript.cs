@@ -12,6 +12,8 @@ public class OpenWarningScript : MonoBehaviour
     [SerializeField] private Sprite[] _warningTexts;
     [SerializeField] private GameObject _penguin;
 
+    private int _mistakes;
+
     private int _mistakesCount;
 
     private void Awake()
@@ -23,17 +25,14 @@ public class OpenWarningScript : MonoBehaviour
     private void Update()
     {
         if (Input.anyKeyDown)
-        {
-            CloseWarningPanel();
-        }    
-            
+            CloseWarningPanel();    
     }
 
     public void OpenWarningPanel(int targetLanguage)
     {
+        TextGenerator.instance.gameObject.SetActive(false);
         _warningPanel.SetActive(true);
         _warningPanelText.sprite = _warningTexts[targetLanguage];
-        //_warningPanelText.transform.position = new Vector2(_penguin.transform.position.x + 100, 441);
         Time.timeScale = 0;
     }
 
@@ -42,6 +41,7 @@ public class OpenWarningScript : MonoBehaviour
         _warningPanel?.SetActive(false);
         _warningPanelText.sprite = _warningTexts[2];
         Time.timeScale = 1;
+        TextGenerator.instance.gameObject.SetActive(true);
         gameObject.SetActive(false);
     }
 }
