@@ -19,10 +19,7 @@ public class MoveMainText : MonoBehaviour
             instance = this;
     }
 
-    private void Start()
-    {
-        SetUp();
-    }
+    private void Start() => SetUp();
 
     private void SetUp()
     {
@@ -30,8 +27,5 @@ public class MoveMainText : MonoBehaviour
          _textLength = _mainText.text.Length;
     }
 
-    public void MoveScroller()
-    {
-         _textScroller.value += (float)1 / _textLength;
-    }
+    public void MoveScroller() => _textScroller.value += (float)1 / _textLength;
 }

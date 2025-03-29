@@ -34,24 +34,14 @@ public class IceSpawner : MonoBehaviour
 
         if (currentTextIndex > 0)
         {
-            /*Debug.Log(currentTextIndex);
-            Debug.Log(charsPerIce);
-            Debug.Log((int)(currentTextIndex / charsPerIce) == 0);
-            Debug.Log(_isSpawnedPrefab[(int)(currentTextIndex / charsPerIce)]);*/
-
             if ((int)(currentTextIndex % charsPerIce) == 0 && _isSpawnedPrefab[(int)((currentTextIndex + 1) / charsPerIce)] == false)
             {
                 _isSpawnedPrefab[(int)((currentTextIndex + 1) / charsPerIce)] = true;
                 _iceIndex++;
                 GameObject newIce = Instantiate(_icePrefab, _iceParent);
                 newIce.transform.SetSiblingIndex(_player.transform.GetSiblingIndex() - 1);
-                newIce.AddComponent<IceMoverUp>();
                 newIce.transform.localPosition = new Vector2(_startIcePosition + 310 * _iceIndex, -400);
                 newIce.gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 128);
-
-                IceMoverUp newIceMover = newIce.GetComponent<IceMoverUp>();
-                if (newIceMover != null)
-                    newIceMover.enabled = true;
             }
         }
     }

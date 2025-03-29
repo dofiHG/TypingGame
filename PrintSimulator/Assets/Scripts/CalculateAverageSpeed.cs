@@ -27,7 +27,6 @@ public class CalculateAverageSpeed : MonoBehaviour
         int seconds = Mathf.FloorToInt(time % 60);
 
         timeTxT.text = string.Format("{0:D2}:{1:D2}", minutes, seconds);
-        charsPerMinute = Convert.ToInt32(GenerateText.instance.currentCharIndex / time * 60);
         deathPanelText.text = charsPerMinute.ToString();
         pausePanelText.text = charsPerMinute.ToString();
     }

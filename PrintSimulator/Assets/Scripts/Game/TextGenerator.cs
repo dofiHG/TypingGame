@@ -23,10 +23,7 @@ public class TextGenerator : MonoBehaviour
             instance = this;
     }
 
-    private void Start()
-    {
-        SetUp();
-    }
+    private void Start() => SetUp();
 
     public void SetUp()
     {
@@ -34,15 +31,10 @@ public class TextGenerator : MonoBehaviour
 
         TextAsset textAsset;
         if (_language == 0)
-        {
             textAsset = Resources.Load<TextAsset>("R" + StartGame.instance.speed);
-        }
 
         else
-        {
             textAsset = Resources.Load<TextAsset>("E" + StartGame.instance.speed);
-        }
-        //textAsset = _language == 1? Resources.Load<TextAsset>("English") : Resources.Load<TextAsset>("Russian");
 
         _textStrings = textAsset.text.Split("\n");
         int rangomString = Random.Range(0, _textStrings.Length - 1);
@@ -57,10 +49,7 @@ public class TextGenerator : MonoBehaviour
         _progressSlider.maxValue = _currentText.Length - 1;
     }
 
-    private void Update()
-    {
-        OnTyping();
-    }
+    private void Update() => OnTyping();
 
     private void OnTyping()
     {
@@ -107,12 +96,6 @@ public class TextGenerator : MonoBehaviour
 
                         if (currentCharIndex > 15)
                             MoveMainText.instance.MoveScroller();
-
-                        IceMoverUp currentIce = FindCurrentIce();
-                        if (currentIce != null)
-                        {
-                            currentIce.Move();
-                        }
 
                         _progressSlider.value += 1;
                     }
@@ -162,17 +145,6 @@ public class TextGenerator : MonoBehaviour
             newText += _currentText.Substring(currentCharIndex + 1);
 
         _mainText.text = newText;
-    }
-
-    private IceMoverUp FindCurrentIce()
-    {
-        IceMoverUp[] iceMovers = FindObjectsOfType<IceMoverUp>();
-        foreach (IceMoverUp ice in iceMovers)
-        {
-            if (ice.enabled)
-                return ice;
-        }
-        return null;
     }
 
     private IEnumerator DelayBeforeWin()

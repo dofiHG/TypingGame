@@ -16,18 +16,12 @@ public class PausePanelActiv : MonoBehaviour
     public GameObject bestScore;
     public GameObject bestScoreTxT;
 
-    private CameraMover moverScript;
-    private GenerateText generateTextSctipt;
-
     private void Awake()
     {
         if (instance == null)
             instance = this;
         
         flag = true;
-
-        moverScript = GameObject.Find("Plane").GetComponent<CameraMover>();
-        generateTextSctipt = GameObject.Find("WordsGenerator").GetComponent<GenerateText>();
     }
 
     private void Update()
@@ -59,17 +53,6 @@ public class PausePanelActiv : MonoBehaviour
             }  
         }
 
-        if (tempSpeed != moverScript.environmentSpeed)
-        {
-            bestScore.SetActive(false);
-            bestScoreTxT.SetActive(false); 
-            flag = false;
-
-            moverScript.environmentSpeed = tempSpeed;
-           /* if (player.GetComponent<SquareMover>().speed != 0)
-                player.GetComponent<SquareMover>().speed = tempSpeed;*/
-        }
-
         pausePanel.SetActive(false);
     }
 
@@ -80,20 +63,10 @@ public class PausePanelActiv : MonoBehaviour
         foreach (Transform child in pausePanel.transform.Find("SpeedPanel").transform)
             child.GetComponentInChildren<Image>().color = new Color32(140, 140, 140, 255);
 
-        switch (moverScript.environmentSpeed)
-        {
-            case 0.2f: GameObject.Find("Slow").GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255); break;
-            case 0.5f: GameObject.Find("Medium").GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255); break;
-            case 0.9f: GameObject.Find("Fast").GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255); break;
-            case 1.4f: GameObject.Find("VeryFast").GetComponentInChildren<Image>().color = new Color32(255, 255, 255, 255); break;
-        }
 
-        moverScript.enabled = false;
-        //player.GetComponent<SquareMover>().enabled = false;
         player.GetComponent<Animator>().enabled = false;
         player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         GameObject.Find("CalculateAverageSpeed").GetComponent<CalculateAverageSpeed>().enabled = false;
-        generateTextSctipt.enabled = false;
     }
 
     public void ChooseSpeedBtn()
@@ -102,11 +75,5 @@ public class PausePanelActiv : MonoBehaviour
             child.GetComponent<Image>().color = new Color32(140, 140, 140, 255);
         EventSystem.current.currentSelectedGameObject.GetComponent<Image>().color = Color.white;
         ClosePusePanel();
-    }
-
-    public void ToMenu()
-    {
-        SceneManager.LoadScene(0);
-        //YandexGame.SaveProgress();
     }
 }
